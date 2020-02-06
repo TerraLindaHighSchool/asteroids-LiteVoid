@@ -53,6 +53,16 @@ public class ProtonWave extends Actor
      */
     public void act()
     { 
+        //checkAsteroidHit();
     }
-    
+    /*
+    private void checkAsteroidHit()
+    {
+        Asteroid asteroid = (Asteroid) getOneIntersectingObject(Asteroid.class);
+        if (asteroid != null)
+        {
+            asteroid.hit(DAMAGE);
+        }
+    }
+    */
 }
