@@ -12,6 +12,9 @@ public class Space extends World
     private int startAsteroids = 3;
     private int color; 
     private int starSize;
+    private int difColor1;
+    private int difColor2;
+    private int difColor3;
     
 
     /**
@@ -60,7 +63,10 @@ public class Space extends World
       for(int i = 0; i < count; i++) 
       {   
          color = Greenfoot.getRandomNumber(200);
-         background.setColor(new Color((color * 4/5) , (color), (color)));
+         difColor1 = Greenfoot.getRandomNumber(3) + 2;
+         difColor2 = Greenfoot.getRandomNumber(2) + 2;
+         difColor3 = Greenfoot.getRandomNumber(2) + 1;
+         background.setColor(new Color((color * difColor1/5) , (color * difColor2/4), (color * difColor3/2)));
          starSize = (Greenfoot.getRandomNumber(2) + 2);
          int x = Greenfoot.getRandomNumber(getWidth());
          int y = Greenfoot.getRandomNumber(getHeight());
