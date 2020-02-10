@@ -5,6 +5,7 @@ import greenfoot.*;
  * 
  * @author Poul Henriksen
  * @author Michael Kölling
+ * @author Ryan Hoang
  */
 public class Asteroid extends SmoothMover
 {

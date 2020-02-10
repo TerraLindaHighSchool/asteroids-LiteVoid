@@ -6,6 +6,7 @@ import greenfoot.*;
  * 
  * @author Poul Henriksen
  * @author Michael Kölling
+ * @author Ryan Hoang
  * 
  * @version 1.1
  */

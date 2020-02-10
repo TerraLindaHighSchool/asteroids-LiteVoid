@@ -5,6 +5,8 @@ import greenfoot.*;
  * 
  * @author Poul Henriksen
  * @author Michael Kölling
+ * @author Ryan Hoang
+ *
  */
 public class Bullet extends SmoothMover
 {
@@ -40,7 +42,9 @@ public class Bullet extends SmoothMover
         if(life <= 0) {
             getWorld().removeObject(this);
         } 
-        else {
+        else 
+        {
+            life--;
             move();
             checkAsteroidHit();
         }
