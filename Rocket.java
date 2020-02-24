@@ -35,7 +35,9 @@ public class Rocket extends SmoothMover
     public void act()
     {
         checkKeys();
+        move();
         reloadDelayCount++;
+        checkCollision();
     }
     
     /**
@@ -43,6 +45,7 @@ public class Rocket extends SmoothMover
      */
     private void checkKeys() 
     {
+        ignite(Greenfoot.isKeyDown("up"));
         if (Greenfoot.isKeyDown("space")) 
         {
             fire();
@@ -55,34 +58,7 @@ public class Rocket extends SmoothMover
         {
             turn(5);
         }
-        ignite(Greenfoot.isKeyDown("up"));
-        /*
-        if (Greenfoot.isKeyDown("shift")) 
-        {
-            Wave();
-            waveCount++;
-            if(waveCount == 2)
-            {
-                
-            }
-        }
-        if (Greenfoot.isKeyDown("w")) 
-        {
-            move(3);
-        }
-        if (Greenfoot.isKeyDown("s")) 
-        {
-            move(-3);
-        }
-        if (Greenfoot.isKeyDown("d")) 
-        {
-            turn(3);
-        }
-        if (Greenfoot.isKeyDown("a")) 
-        {
-            turn(-3);
-        }
-        */
+        
     }
     
     private void ignite(boolean boosterOn)
@@ -90,7 +66,7 @@ public class Rocket extends SmoothMover
         if(boosterOn)
         {
             setImage(rocketWithThrust);
-            addToVelocity(new Vector(getRotation(), .3));
+            addToVelocity(new Vector(getRotation(), 0.3));
         }
         else
         {
@@ -98,8 +74,14 @@ public class Rocket extends SmoothMover
         }
     }
     
-    private void stub()
+    private void checkCollision()
     {
+        if( getOneIntersectingObject(Asteroid.class) != null)
+        {
+            World world = getWorld();
+            world.addObject(new Explosion(), getX(), getY());
+            world.removeObject(this);
+        }
     }
     /*
     private void Wave()
