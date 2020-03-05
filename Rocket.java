@@ -13,9 +13,10 @@ import greenfoot.*;
 public class Rocket extends SmoothMover
 {
     private static final int gunReloadTime = 5;         // The minimum delay between firing the gun.
-
+    private static final int waveReloadTime = 180;
+    
     private int reloadDelayCount;               // How long ago we fired the gun the last time.
-    private int waveCount;
+    private int waveDelayCount;
     
     private GreenfootImage rocket = new GreenfootImage("rocket.png");    
     private GreenfootImage rocketWithThrust = new GreenfootImage("rocketWithThrust.png");
@@ -26,6 +27,7 @@ public class Rocket extends SmoothMover
     public Rocket()
     {
         reloadDelayCount = 5;
+        waveDelayCount = 180;
     }
 
     /**
@@ -36,6 +38,7 @@ public class Rocket extends SmoothMover
     {
         checkKeys();
         move();
+        waveDelayCount++;
         reloadDelayCount++;
         checkCollision();
     }
@@ -58,7 +61,10 @@ public class Rocket extends SmoothMover
         {
             turn(5);
         }
-        
+        if(Greenfoot.isKeyDown("z"))
+        {
+            startProtonWave();
+        }
     }
     
     private void ignite(boolean boosterOn)
@@ -78,19 +84,24 @@ public class Rocket extends SmoothMover
     {
         if( getOneIntersectingObject(Asteroid.class) != null)
         {
-            World world = getWorld();
-            world.addObject(new Explosion(), getX(), getY());
-            world.removeObject(this);
+            Space space = (Space) getWorld();
+            space.addObject(new Explosion(), getX(), getY());
+            space.removeObject(this);
+            space.gameOver();
         }
     }
-    /*
-    private void Wave()
+   
+    private void startProtonWave()
     {
-        ProtonWave wave = new ProtonWave ();
-        getWorld().addObject (wave, getX(), getY());
-        reloadDelayCount = 0;
+        if(waveDelayCount >= waveReloadTime)
+        {
+            ProtonWave wave = new ProtonWave();
+            getWorld().addObject (wave, getX(), getY());
+            waveDelayCount = 0;
+        }
     }
-    */
+    
+   
     /**
      * Fire a bullet if the gun is ready.
      */
